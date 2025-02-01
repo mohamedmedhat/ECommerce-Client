@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styles: ``,
 })
 export class AppComponent {
-  title = 'main-app';
+  title = 'auth';
 }
