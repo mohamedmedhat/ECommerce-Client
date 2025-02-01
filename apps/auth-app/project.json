@@ -1,9 +1,9 @@
 {
-  "name": "main-app",
+  "name": "auth",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/main-app/src",
+  "sourceRoot": "apps/auth-app/src",
   "tags": [],
   "targets": {
     "build": {
@@ -11,10 +11,10 @@
       "options": {},
       "configurations": {
         "production": {
-          "target": "main-app:esbuild:production"
+          "target": "auth:esbuild:production"
         },
         "development": {
-          "target": "main-app:esbuild:development",
+          "target": "auth:esbuild:development",
           "dev": true
         }
       },
@@ -23,7 +23,7 @@
     "serve": {
       "executor": "@angular-architects/native-federation:build",
       "options": {
-        "target": "main-app:serve-original:development",
+        "target": "auth:serve-original:development",
         "rebuildDelay": 0,
         "dev": true,
         "port": 0
@@ -32,7 +32,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "main-app:build"
+        "buildTarget": "auth:build"
       }
     },
     "lint": {
@@ -44,15 +44,15 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "apps/main-app/jest.config.ts"
+        "jestConfig": "apps/auth-app/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "main-app:build",
-        "port": 4200,
-        "staticFilePath": "dist/apps/main-app/browser",
+        "buildTarget": "auth:build",
+        "port": 4201,
+        "staticFilePath": "dist/apps/auth-app/browser",
         "spa": true
       }
     },
@@ -62,22 +62,22 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/apps/main-app",
-        "index": "apps/main-app/src/index.html",
-        "browser": "apps/main-app/src/main.ts",
+        "outputPath": "dist/apps/auth-app",
+        "index": "apps/auth-app/src/index.html",
+        "browser": "apps/auth-app/src/main.ts",
         "polyfills": [
           "zone.js",
           "es-module-shims"
         ],
-        "tsConfig": "apps/main-app/tsconfig.app.json",
+        "tsConfig": "apps/auth-app/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/main-app/public"
+            "input": "apps/auth-app/public"
           }
         ],
         "styles": [
-          "apps/main-app/src/styles.css"
+          "apps/auth-app/src/styles.css"
         ],
         "scripts": []
       },
@@ -107,18 +107,18 @@
     },
     "serve-original": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4201
+      },
       "configurations": {
         "production": {
-          "buildTarget": "main-app:esbuild:production"
+          "buildTarget": "auth:esbuild:production"
         },
         "development": {
-          "buildTarget": "main-app:esbuild:development"
+          "buildTarget": "auth:esbuild:development"
         }
       },
-      "defaultConfiguration": "development",
-      "options": {
-        "port": 4200
-      }
+      "defaultConfiguration": "development"
     }
   }
 }
